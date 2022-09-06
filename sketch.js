@@ -13,7 +13,7 @@ let from;
 let to;
 let transitioning = false;
 function setup() {
-  createCanvas(windowHeight, windowWidth);
+  createCanvas(windowWidth, windowHeight);
 }
 
 function draw() {
@@ -23,7 +23,7 @@ function draw() {
   // rect(windowWidth/2, windowHeight/2, 100, 100);
   noStroke();
   fill("#f9ca24");
-  translate(windowHeight/2, windowWidth/2)
+  translate(windowWidth/2, windowHeight/2)
   bezier(
     -50, 0,
     -10, duneHeight1, -10, duneHeight1,
