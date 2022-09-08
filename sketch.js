@@ -36,6 +36,8 @@ function setup() {
 
 function draw() {
   background("#fab1a0");
+  fill("black");
+  text(`${windowWidth}, ${windowHeight}`, 100, 100);
   DUNE_START_X = windowWidth/2-DUNE_LENGTH*(DUNE_COUNT/2);
 
   // Draw divider
@@ -48,13 +50,6 @@ function draw() {
 
   noStroke();
   translate(windowWidth/2-DUNE_LENGTH*(DUNE_COUNT/2), windowHeight/2)
-  // for (let i = 0; i < DUNE_COUNT; i++) {
-  //   bezier(
-  //     DUNE_LENGTH*i, 0,
-  //     DUNE_LENGTH*i+10, duneHeight1, DUNE_LENGTH*i+50, duneHeight1,
-  //     DUNE_LENGTH*i+DUNE_LENGTH, 0
-  //   );
-  // }
   const DUNE_COLORS = ["#ffeaa7", "#e3d598", "#7ed6df", "#dff9fb", "#b8e994", "#f8c291"];
   const DUNE_CONTROL_POINTS = {
     0: [10, 30],
