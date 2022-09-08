@@ -13,7 +13,7 @@ let p = 0;
 let from;
 let to;
 let transitioning = false;
-const DUNE_HEIGHTS = [0, 0, 0];
+const DUNE_HEIGHTS = [0, 0, 0, 0, 0, 0];
 const DUNE_COLORS = ["255, 234, 167", "227, 213, 152", "235, 217, 138"];
 
 // COLORS
@@ -45,7 +45,7 @@ function draw() {
 
   // Draw dunes
   push();
-  fill(DUNE_COLOR);
+
   noStroke();
   translate(windowWidth/2-DUNE_LENGTH*(DUNE_COUNT/2), windowHeight/2)
   // for (let i = 0; i < DUNE_COUNT; i++) {
@@ -55,49 +55,26 @@ function draw() {
   //     DUNE_LENGTH*i+DUNE_LENGTH, 0
   //   );
   // }
+  const DUNE_COLORS = ["#ffeaa7", "#e3d598", "#7ed6df", "#dff9fb", "#b8e994", "#f8c291"];
+  const DUNE_CONTROL_POINTS = {
+    0: [10, 30],
+    1: [50, 90],
+    2: [50, 20],
+    3: [25, 100],
+    4: [100, 20],
+    5: [10, 20]
+  };
 
-  const OFFSET = 0;
-
-  // Dune #1
-  bezier(
-    0, 0,
-    10, DUNE_HEIGHTS[0], 30, DUNE_HEIGHTS[0],
-    DUNE_LENGTH, 0
-  );
-  rect(0, 0, DUNE_LENGTH, -DIVIDER_HEIGHT)
-
-  // Dune #2
-  let leftPos = DUNE_LENGTH - OFFSET;
-  fill("#e3d598");
-  bezier(
-    leftPos, 0,
-    leftPos+50, DUNE_HEIGHTS[1], leftPos+90, DUNE_HEIGHTS[1],
-    leftPos+DUNE_LENGTH, 0
-  );
-  rect(leftPos, 0, DUNE_LENGTH, -DIVIDER_HEIGHT)
-
-  // Dune #3
-  leftPos = DUNE_LENGTH*2 - OFFSET*2;
-  fill("#7ed6df");
-  bezier(
-    leftPos, 0,
-    leftPos+50, DUNE_HEIGHTS[2], leftPos+20, DUNE_HEIGHTS[2],
-    leftPos+DUNE_LENGTH, 0
-  );
-  rect(leftPos, 0, DUNE_LENGTH, -DIVIDER_HEIGHT)
-
-  // bezier(
-  //   0, 0,
-  //   10, duneHeight1, 30, duneHeight1,
-  //   DUNE_LENGTH+DUNE_LENGTH, 0
-  // );
-
-  // bezier(
-  //   DUNE_LENGTH/2, 0,
-  //   -10, duneHeight1, -10, duneHeight1,
-  //   DUNE_LENGTH/2 * 2, 0
-  // );
-
+  for (let i = 0; i < DUNE_COUNT; i++) {
+    let leftPos = DUNE_LENGTH * i;
+    fill(DUNE_COLORS[i]);
+    bezier(
+      leftPos, 0,
+      leftPos+DUNE_CONTROL_POINTS[i][0], DUNE_HEIGHTS[i], leftPos+DUNE_CONTROL_POINTS[i][1], DUNE_HEIGHTS[i],
+      leftPos+DUNE_LENGTH, 0
+    );
+    rect(leftPos, 0, DUNE_LENGTH, -DIVIDER_HEIGHT)
+  }
   pop();
 }
 
