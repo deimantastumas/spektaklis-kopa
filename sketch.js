@@ -23,18 +23,20 @@ const SCREEN_WIDTH = 450;
 const SCREEN_HEIGHT = 320;
 
 let socket;
+let clientId;
 
 function setup() {
   createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
   DUNE_LENGTH = SCREEN_WIDTH / 10;
 
   // socket = io.connect("http://cf5b-84-15-183-246.eu.ngrok.io");
-  // socket = io('https://spektaklis-kopa-api.herokuapp.com/', { transports : ['websocket'] });
+  socket = io('https://spektaklis-kopa-api.herokuapp.com/', { transports : ['websocket'] });
   // socket = io('localhost:3000', { transports : ['websocket'] });
+  clientId = guid();
 
-  // socket.on('connect', function() {
-  //   console.log("Connected");
-  // });
+  socket.on('connect', function() {
+    console.log("Connected");
+  });
 }
 
 function draw() {
@@ -126,4 +128,18 @@ function changeDuneHeight(duneIndex, change) {
   if (newHeight >= -SCREEN_HEIGHT/4 && newHeight <= SCREEN_HEIGHT/4) {
     DUNE_HEIGHTS[duneIndex] = newHeight;
   }
+  socket.emit('write_dunes', {
+    'clientId': clientId,
+    'dunes': DUNE_HEIGHTS
+  })
+}
+
+function guid() {
+  //someone else's function
+  //https://slavik.meltser.info/the-efficient-way-to-create-guid-uuid-in-javascript-with-explanation/
+  function _p8(s) {
+    var p = (Math.random().toString(16) + "000000000").substr(2, 8);
+    return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
+  }
+  return _p8() + _p8(true) + _p8(true) + _p8();
 }
