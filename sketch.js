@@ -51,7 +51,7 @@ function draw() {
   fill("#f5f6fa");
   textSize(labelSize);
   textAlign(CENTER);
-  text("ŠVENTOJI", SCREEN_HEIGHT/2, -DUNE_START_X-DUNE_COUNT*DUNE_LENGTH-SCREEN_WIDTH/20);
+  text("PREILA", SCREEN_HEIGHT/2, -DUNE_START_X-DUNE_COUNT*DUNE_LENGTH-SCREEN_WIDTH/20);
   pop();
   // Draw dunes
   push();
@@ -69,7 +69,7 @@ function draw() {
 
   for (let i = 0; i < DUNE_COUNT; i++) {
     let leftPos = DUNE_LENGTH * i;
-    fill(DUNE_COLORS[i]);
+    fill(DUNE_COLORS[0]);
     bezier(
       leftPos, 0,
       leftPos+DUNE_CONTROL_POINTS[i][0], DUNE_HEIGHTS[i], leftPos+DUNE_CONTROL_POINTS[i][1], DUNE_HEIGHTS[i],
