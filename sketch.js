@@ -11,7 +11,7 @@ const DUNE_COLOR = "#ffeaa7";
 
 // SIZES
 const DIVIDER_HEIGHT = 2;
-const DUNE_LENGTH = 100;
+let DUNE_LENGTH;
 
 // OTHER
 const DUNE_COUNT = 6;
@@ -19,42 +19,52 @@ const DUNE_CONTROL_POINTS_X1 = [30, 60, 40, 10, 80, 30]
 const DUNE_CONTROL_POINTS_X2 = [60, 90, 50, 70, 150, 40]
 let DUNE_START_X;
 
+const SCREEN_WIDTH = 450;
+const SCREEN_HEIGHT = 320;
+
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
+  DUNE_LENGTH = SCREEN_WIDTH / 10;
 }
 
 function draw() {
   background("#192a56");
-  DUNE_START_X = windowWidth/2-DUNE_LENGTH*(DUNE_COUNT/2);
+  DUNE_START_X = SCREEN_WIDTH/2-DUNE_LENGTH*(DUNE_COUNT/2);
 
   // Add labels
   push();
-  translate(windowWidth/2, windowHeight)
+  fill("#f5f6fa");
+  textAlign(CENTER);
+  text("spektaklis: kopa", SCREEN_WIDTH/2, SCREEN_HEIGHT/10);
+  pop();
+  push();
+  const labelSize = SCREEN_HEIGHT / 15;
+  translate(SCREEN_WIDTH/2, SCREEN_HEIGHT)
   rotate(radians(270));
   textAlign(CENTER);
-  textSize(50);
+  textSize(labelSize);
   fill("#f5f6fa");
-  text("PALANGA", windowHeight/2, -DUNE_START_X+75);
+  text("PALANGA", SCREEN_HEIGHT/2, -DUNE_START_X-SCREEN_WIDTH/7);
   pop();
   push();
   rotate(radians(90));
   fill("#f5f6fa");
-  textSize(50);
+  textSize(labelSize);
   textAlign(CENTER);
-  text("ŠVENTOJI", windowHeight/2, -DUNE_START_X-DUNE_COUNT*DUNE_LENGTH-50);
+  text("ŠVENTOJI", SCREEN_HEIGHT/2, -DUNE_START_X-DUNE_COUNT*DUNE_LENGTH-SCREEN_WIDTH/20);
   pop();
   // Draw dunes
   push();
   noStroke();
-  translate(windowWidth/2-DUNE_LENGTH*(DUNE_COUNT/2), windowHeight/2)
+  translate(SCREEN_WIDTH/2-DUNE_LENGTH*(DUNE_COUNT/2), SCREEN_HEIGHT/2)
   const DUNE_COLORS = ["#ffeaa7", "#82589F", "#7ed6df", "#dff9fb", "#b8e994", "#e55039"];
   const DUNE_CONTROL_POINTS = {
     0: [10, 30],
-    1: [50, 90],
+    1: [50, 60],
     2: [50, 20],
-    3: [25, 100],
-    4: [100, 20],
-    5: [10, 20]
+    3: [25, 30],
+    4: [50, 30],
+    5: [-10, 20]
   };
 
   for (let i = 0; i < DUNE_COUNT; i++) {
@@ -68,13 +78,13 @@ function draw() {
     rect(leftPos, 0, DUNE_LENGTH, -DIVIDER_HEIGHT)
     textAlign(CENTER);
     fill("#f5f6fa");
-    text("lorem ipsum", leftPos+DUNE_LENGTH/2, 130)
+    text("🌊", leftPos+DUNE_LENGTH/2, SCREEN_HEIGHT/3.5)
   }
   pop();
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
 }
 
 function touchEnded() {
@@ -100,7 +110,7 @@ function touchMoved(event) {
 
 function changeDuneHeight(duneIndex, change) {
   const newHeight = DUNE_HEIGHTS[duneIndex] + change;
-  if (newHeight >= -150 && newHeight <= 150) {
+  if (newHeight >= -SCREEN_HEIGHT/4 && newHeight <= SCREEN_HEIGHT/4) {
     DUNE_HEIGHTS[duneIndex] = newHeight;
   }
 }
