@@ -2,19 +2,8 @@ let duneHeight1 = 0;
 let duneHeight2 = 300;
 let currentY = 0;
 let currentDuneIndex = -1;
-const screenWidth = 500;
-const screenHeight = 500;
-let screenOrientation;
 
-const NIGHT_COLOR = "#34495e";
-const DAY_COLOR = "#74b9ff";
-let skyColor = DAY_COLOR;
-let p = 0;
-let from;
-let to;
-let transitioning = false;
 const DUNE_HEIGHTS = [0, 0, 0, 0, 0, 0];
-const DUNE_COLORS = ["255, 234, 167", "227, 213, 152", "235, 217, 138"];
 
 // COLORS
 const DIVIDER_COLOR = "#eb9986";
@@ -35,22 +24,30 @@ function setup() {
 }
 
 function draw() {
-  background("#fab1a0");
-  fill("black");
-  text(`${DUNE_HEIGHTS[0]}`, 100, 100);
+  background("#192a56");
   DUNE_START_X = windowWidth/2-DUNE_LENGTH*(DUNE_COUNT/2);
 
-  // Draw divider
-  // fill(DIVIDER_COLOR);
-  // noStroke();
-  // rect(DUNE_START_X, windowHeight/2-DIVIDER_HEIGHT, DUNE_COUNT*DUNE_LENGTH, DIVIDER_HEIGHT)
-
+  // Add labels
+  push();
+  translate(windowWidth/2, windowHeight)
+  rotate(radians(270));
+  textAlign(CENTER);
+  textSize(50);
+  fill("#f5f6fa");
+  text("PALANGA", windowHeight/2, -DUNE_START_X+75);
+  pop();
+  push();
+  rotate(radians(90));
+  fill("#f5f6fa");
+  textSize(50);
+  textAlign(CENTER);
+  text("ŠVENTOJI", windowHeight/2, -DUNE_START_X-DUNE_COUNT*DUNE_LENGTH-50);
+  pop();
   // Draw dunes
   push();
-
   noStroke();
   translate(windowWidth/2-DUNE_LENGTH*(DUNE_COUNT/2), windowHeight/2)
-  const DUNE_COLORS = ["#ffeaa7", "#e3d598", "#7ed6df", "#dff9fb", "#b8e994", "#e55039"];
+  const DUNE_COLORS = ["#ffeaa7", "#82589F", "#7ed6df", "#dff9fb", "#b8e994", "#e55039"];
   const DUNE_CONTROL_POINTS = {
     0: [10, 30],
     1: [50, 90],
@@ -70,7 +67,7 @@ function draw() {
     );
     rect(leftPos, 0, DUNE_LENGTH, -DIVIDER_HEIGHT)
     textAlign(CENTER);
-    fill("#0a3d62");
+    fill("#f5f6fa");
     text("lorem ipsum", leftPos+DUNE_LENGTH/2, 130)
   }
   pop();
