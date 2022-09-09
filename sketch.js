@@ -45,7 +45,7 @@ function draw() {
   push();
   fill("#f5f6fa");
   textAlign(CENTER);
-  text("spektaklis: kopa", SCREEN_WIDTH/2, SCREEN_HEIGHT/10);
+  text('Spektaklis: "Smėlio dėžėje"', SCREEN_WIDTH/2, SCREEN_HEIGHT/10);
   pop();
   push();
   const labelSize = SCREEN_HEIGHT / 15;
@@ -54,14 +54,14 @@ function draw() {
   textAlign(CENTER);
   textSize(labelSize);
   fill("#f5f6fa");
-  text("NIDA", SCREEN_HEIGHT/2, -DUNE_START_X-SCREEN_WIDTH/7);
+  text("PREILA", SCREEN_HEIGHT/2, -DUNE_START_X-SCREEN_WIDTH/7);
   pop();
   push();
   rotate(radians(90));
   fill("#f5f6fa");
   textSize(labelSize);
   textAlign(CENTER);
-  text("PREILA", SCREEN_HEIGHT/2, -DUNE_START_X-DUNE_COUNT*DUNE_LENGTH-SCREEN_WIDTH/20);
+  text("NIDA", SCREEN_HEIGHT/2, -DUNE_START_X-DUNE_COUNT*DUNE_LENGTH-SCREEN_WIDTH/20);
   pop();
   // Draw dunes
   push();
