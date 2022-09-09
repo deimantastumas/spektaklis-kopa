@@ -30,11 +30,11 @@ function setup() {
 
   // socket = io.connect("http://cf5b-84-15-183-246.eu.ngrok.io");
   // socket = io('https://spektaklis-kopa-api.herokuapp.com/', { transports : ['websocket'] });
-  socket = io('https://spektaklis-kopa-api.herokuapp.com/', { transports : ['websocket'] });
+  // socket = io('localhost:3000', { transports : ['websocket'] });
 
-  socket.on('connect', function() {
-    console.log("Connected");
-  });
+  // socket.on('connect', function() {
+  //   console.log("Connected");
+  // });
 }
 
 function draw() {
@@ -54,7 +54,7 @@ function draw() {
   textAlign(CENTER);
   textSize(labelSize);
   fill("#f5f6fa");
-  text("PALANGA", SCREEN_HEIGHT/2, -DUNE_START_X-SCREEN_WIDTH/7);
+  text("NIDA", SCREEN_HEIGHT/2, -DUNE_START_X-SCREEN_WIDTH/7);
   pop();
   push();
   rotate(radians(90));
@@ -102,7 +102,6 @@ function windowResized() {
 function touchEnded() {
   currentY = 0;
   currentDuneIndex = -1;
-  socket.emit("generic_message", {x: mouseX, y: mouseY});
 }
 
 function touchMoved(event) {
@@ -122,6 +121,7 @@ function touchMoved(event) {
 }
 
 function changeDuneHeight(duneIndex, change) {
+  // socket.emit("clientEvent", {x: mouseX, y: mouseY});
   const newHeight = DUNE_HEIGHTS[duneIndex] + change;
   if (newHeight >= -SCREEN_HEIGHT/4 && newHeight <= SCREEN_HEIGHT/4) {
     DUNE_HEIGHTS[duneIndex] = newHeight;
