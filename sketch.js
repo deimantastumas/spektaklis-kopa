@@ -58,6 +58,7 @@ function draw() {
   noStroke();
   translate(SCREEN_WIDTH/2-DUNE_LENGTH*(DUNE_COUNT/2), SCREEN_HEIGHT/2)
   const DUNE_COLORS = ["#ffeaa7", "#82589F", "#7ed6df", "#dff9fb", "#b8e994", "#e55039"];
+  const DUNE_LABELS = ["Laisvalaikis", "Tikslai", "Tėvai", "Draugai", "Išvaizda", "Laimė"]
   const DUNE_CONTROL_POINTS = {
     0: [10, 30],
     1: [50, 60],
@@ -78,7 +79,8 @@ function draw() {
     rect(leftPos, 0, DUNE_LENGTH, -DIVIDER_HEIGHT)
     textAlign(CENTER);
     fill("#f5f6fa");
-    text("🌊", leftPos+DUNE_LENGTH/2, SCREEN_HEIGHT/3.5)
+    textSize(SCREEN_HEIGHT/30);
+    text(DUNE_LABELS[i], leftPos+DUNE_LENGTH/2, SCREEN_HEIGHT/3.5)
   }
   pop();
 }
