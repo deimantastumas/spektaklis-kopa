@@ -45,7 +45,7 @@ function draw() {
   push();
   fill("#f5f6fa");
   textAlign(CENTER);
-  text('Spektaklis: "Smėlio dėžėje"', SCREEN_WIDTH/2, SCREEN_HEIGHT/10);
+  text('Spektaklis: Smėlio dėžėje', SCREEN_WIDTH/2, SCREEN_HEIGHT/10);
   pop();
   push();
   const labelSize = SCREEN_HEIGHT / 15;
