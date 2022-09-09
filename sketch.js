@@ -22,9 +22,19 @@ let DUNE_START_X;
 const SCREEN_WIDTH = 450;
 const SCREEN_HEIGHT = 320;
 
+let socket;
+
 function setup() {
   createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
   DUNE_LENGTH = SCREEN_WIDTH / 10;
+
+  // socket = io.connect("http://cf5b-84-15-183-246.eu.ngrok.io");
+  // socket = io('https://spektaklis-kopa-api.herokuapp.com/', { transports : ['websocket'] });
+  socket = io('https://spektaklis-kopa-api.herokuapp.com/', { transports : ['websocket'] });
+
+  socket.on('connect', function() {
+    console.log("Connected");
+  });
 }
 
 function draw() {
@@ -92,6 +102,7 @@ function windowResized() {
 function touchEnded() {
   currentY = 0;
   currentDuneIndex = -1;
+  socket.emit("generic_message", {x: mouseX, y: mouseY});
 }
 
 function touchMoved(event) {
