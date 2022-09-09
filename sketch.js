@@ -37,20 +37,20 @@ function setup() {
 function draw() {
   background("#fab1a0");
   fill("black");
-  text(`${windowWidth}, ${windowHeight}`, 100, 100);
+  text(`${DUNE_HEIGHTS[0]}`, 100, 100);
   DUNE_START_X = windowWidth/2-DUNE_LENGTH*(DUNE_COUNT/2);
 
   // Draw divider
-  fill(DIVIDER_COLOR);
-  noStroke();
-  rect(0, windowHeight/2-DIVIDER_HEIGHT, windowWidth, DIVIDER_HEIGHT)
+  // fill(DIVIDER_COLOR);
+  // noStroke();
+  // rect(DUNE_START_X, windowHeight/2-DIVIDER_HEIGHT, DUNE_COUNT*DUNE_LENGTH, DIVIDER_HEIGHT)
 
   // Draw dunes
   push();
 
   noStroke();
   translate(windowWidth/2-DUNE_LENGTH*(DUNE_COUNT/2), windowHeight/2)
-  const DUNE_COLORS = ["#ffeaa7", "#e3d598", "#7ed6df", "#dff9fb", "#b8e994", "#f8c291"];
+  const DUNE_COLORS = ["#ffeaa7", "#e3d598", "#7ed6df", "#dff9fb", "#b8e994", "#e55039"];
   const DUNE_CONTROL_POINTS = {
     0: [10, 30],
     1: [50, 90],
@@ -69,6 +69,9 @@ function draw() {
       leftPos+DUNE_LENGTH, 0
     );
     rect(leftPos, 0, DUNE_LENGTH, -DIVIDER_HEIGHT)
+    textAlign(CENTER);
+    fill("#0a3d62");
+    text("lorem ipsum", leftPos+DUNE_LENGTH/2, 130)
   }
   pop();
 }
@@ -83,43 +86,24 @@ function touchEnded() {
 }
 
 function touchMoved(event) {
-  // print(event);
-  const color = `${get(mouseX, mouseY)[0]}, ${get(mouseX, mouseY)[1]}, ${get(mouseX, mouseY)[2]}`;
-  const duneIndex = DUNE_COLORS.indexOf(color);
   if (currentY != 0) {
     const deltaMovement = event.pageY - currentY;
     currentY = 0;
     if (currentDuneIndex != -1) {
-      DUNE_HEIGHTS[currentDuneIndex] += deltaMovement;
+      changeDuneHeight(currentDuneIndex, deltaMovement);
     } else if (mouseX > DUNE_START_X) {
       const duneIndex = floor(floor(mouseX - DUNE_START_X) / DUNE_LENGTH);
-      DUNE_HEIGHTS[duneIndex] += deltaMovement;
+      changeDuneHeight(duneIndex, deltaMovement);
       currentDuneIndex = duneIndex;
     }
   } else {
     currentY = event.pageY;
   }
-  // const movement = event.movementY * -1;
-  // if (event.x <= 200) {
-  //   if (movement > 0 && duneHeight1 > 0) {
-  //   duneHeight1 -= movement;
-  //   }
-  //   if (movement < 0 && duneHeight1 < 600) {
-  //     duneHeight1 -= movement;
-  //   }
-  //   if (duneHeight1 > 600) {
-  //     duneHeight1 = 600;
-  //   }
-  // } else {
-  //   if (movement > 0 && duneHeight2 > 0) {
-  //   duneHeight2 -= movement;
-  //   }
-  //   if (movement < 0 && duneHeight2 < 600) {
-  //     duneHeight2 -= movement;
-  //   }
-  //   if (duneHeight2 > 600) {
-  //     duneHeight2 = 600;
-  //   }
-  // }
-  // console.log(duneHeight);
+}
+
+function changeDuneHeight(duneIndex, change) {
+  const newHeight = DUNE_HEIGHTS[duneIndex] + change;
+  if (newHeight >= -150 && newHeight <= 150) {
+    DUNE_HEIGHTS[duneIndex] = newHeight;
+  }
 }
