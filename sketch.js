@@ -29,8 +29,9 @@ const PLAY_STATES = {
 	NotStarted: 0,
 	Started: 1,
 	Ended: 2,
+  Loading: 3
 }
-let playState = PLAY_STATES.NotStarted;
+let playState = PLAY_STATES.Loading;
 
 function setup() {
   createCanvas(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -122,6 +123,19 @@ function draw() {
       text(DUNE_LABELS[i], leftPos+DUNE_LENGTH/2, SCREEN_HEIGHT/3.5)
     }
     pop();
+  } else if (playState == PLAY_STATES.Loading) {
+    push();
+    noStroke();
+    fill("#ffeaa7");
+    bezier(
+      SCREEN_WIDTH/2-25, SCREEN_HEIGHT/2,
+      SCREEN_WIDTH/2+40, 70, SCREEN_WIDTH/2+100, 70,
+      SCREEN_WIDTH/2+50, SCREEN_HEIGHT/2
+    );
+    fill("#f5f6fa");
+    textAlign(CENTER);
+    text('Spektaklis: Smėlio dėžėje', SCREEN_WIDTH/2, SCREEN_HEIGHT/2+25);
+    pop();
   } else {
     push();
     fill("#f5f6fa");
@@ -145,7 +159,7 @@ function touchEnded() {
 function touchMoved(event) {
   if (playState == PLAY_STATES.Started) {
     if (currentY != 0) {
-      const deltaMovement = event.pageY - currentY;
+      const deltaMovement = event.changedTouches[0].pageY - currentY;
       currentY = 0;
       if (currentDuneIndex != -1) {
         changeDuneHeight(currentDuneIndex, deltaMovement);
@@ -155,7 +169,7 @@ function touchMoved(event) {
         currentDuneIndex = duneIndex;
       }
     } else {
-      currentY = event.pageY;
+      currentY = event.changedTouches[0].pageY;
     }
   }
 }
