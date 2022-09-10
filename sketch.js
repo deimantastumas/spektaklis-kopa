@@ -43,12 +43,9 @@ function setup() {
     console.log("Connected");
     socket.emit('join_room', {'room': 'user'});
   });
-  socket.on('play_started', () => {
-    playState = PLAY_STATES.Started;
-  });
-  socket.on('play_ended', () => {
-    playState = PLAY_STATES.Ended;
-  });
+  socket.on('play_state', (data) => {
+    playState = data.playState;
+  })
 }
 
 function draw() {
